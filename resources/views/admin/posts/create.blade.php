@@ -16,14 +16,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <form action="/admin/posts" method="POST" role="form">
+    <form action="{{route('admin.posts.store')}}"  method="POST" role="form">
         @method('POST')
         @csrf
 
         <div class="form-group">
             <label for="title" class="form-label">文章標題</label>
-            <input id="title" type="text" class="form-control" value="{{old('title')}}" placeholder="請輸入文章標題">
+            <textarea id="title" name="title" class="form-control" rows="1" placeholder="請輸入文章標題">{{old('title')}}</textarea>
+        </div>
 
+        <div class="form-group">
             <label for="content" class="form-label">文章內容</label>
             <textarea id="content" name="content" class="form-control" rows="10" placeholder="請輸入文章內容">{{old('content')}}</textarea>
         </div>
@@ -35,11 +37,11 @@
                 <option value="1">是</option>
             </select>
         </div>
-    </form>
-    
-    <div class=" form-group d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary btn-sm" href="#">儲存</a>
-    </div>
 
+        <div class=" form-group d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-sm">儲存</button>
+        </div>
+
+    </form>
 </div>
 @endsection

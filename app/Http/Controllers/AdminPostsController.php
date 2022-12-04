@@ -21,7 +21,10 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        Post::create($request->all());
+        //跳轉頁面
+        return redirect()->route('admin.posts.index');
     }
 
     public function edit($id)
