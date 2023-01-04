@@ -21,7 +21,12 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
+        //資料驗證
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'content' => 'required',
+            'is_feature' => 'required|Boolean',
+        ]);
         Post::create($request->all());
         //跳轉頁面
         return redirect()->route('admin.posts.index');
@@ -29,12 +34,19 @@ class AdminPostsController extends Controller
 
     public function edit(Post $post)
     {
-        $data=['post'=>$post];
-        return view('admin.posts.edit',$data);
+       $data=['post'=>$post];
+       return view('admin.posts.edit',$data);
+       //return $post;
     }
 
     public function update(Request $request, Post $post)
     {
+        //資料驗證
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'content' => 'required',
+            'is_feature' => 'required|Boolean',
+        ]);
         $post->update($request->all());
         return redirect()->route('admin.posts.index');
     }
