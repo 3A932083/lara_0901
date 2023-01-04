@@ -3,18 +3,16 @@
 @section('page-title', 'Edit article')
 
 @section('page-content')
-<div class="container-fluid px-4">
-    <h1 class="mt-4">文章管理</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">編輯文章</li>
-    </ol>
-    <div class="alert alert-danger alert-dismissible" role="alert" id="liveAlert">
-        <strong>錯誤！</strong> 請修正以下問題：
-        <ul>
-            <li>錯誤 1</li>
-        </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+
+
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">文章管理</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">編輯文章</li>
+            </ol>
+            <!-- 顯示驗證錯誤 -->
+            @include('admin.layouts.shared.errors')
+
     <form action="/admin/posts/{{$post->id}}" method="POST" role="form">
         @method('PATCH')
         @csrf
@@ -26,7 +24,8 @@
 
         <div class="form-group">
             <label for="content" class="form-label">文章內容</label>
-            <textarea id="content" name="content" class="form-control" rows="10" placeholder="請輸入文章內容">{{old('content',$post->content)}}</textarea>
+            <textarea id="content" name="content" class="form-control" rows="10"
+                      placeholder="請輸入文章內容">{{old('content',$post->content)}}</textarea>
         </div>
 
         <div class="form-group">
@@ -42,5 +41,5 @@
 
         </div>
     </form>
-</div>
+    </div>
 @endsection
